@@ -132,10 +132,11 @@
       },
       "quota": {
         "noData": "Žádná data kvóty",
+        "queryFailed": "Dotaz na kvótu selhal",
         "resetDone": "Resetováno",
         "hourly": "Kvóta 5 hodin",
         "weekly": "Týdenní kvóta",
-        "resetAt": "Reset: {{time}}"
+        "resetAt": "Obnovení: {{time}}"
       },
       "subtitle": "Spravujte své účty GitHub Copilot",
       "time": {
@@ -309,7 +310,8 @@
       "running": "Běží",
       "stopped": "Zastaveno",
       "restarting": "Restartování",
-      "starting": "Spuštění"
+      "starting": "Spuštění",
+      "ready": "Připraveno"
     },
     "labels": {
       "path": "Adresář",
@@ -319,7 +321,8 @@
       "unbound": "Nepropojeno",
       "pendingInit": "Čeká na inicializaci (nejprve jednou spusťte)",
       "quota": "Kvóta",
-      "lastLaunched": "Poslední spuštění"
+      "lastLaunched": "Poslední spuštění",
+      "argsPresent": "Nastaveno"
     },
     "columns": {
       "instance": "Instance",
@@ -369,7 +372,14 @@
       "extraArgsDesc": "Argumenty oddělujte mezerami, uvozovky jsou podporovány",
       "nameRequired": "Zadejte prosím název instance",
       "pathRequired": "Vyberte prosím adresář instance",
-      "bindRequired": "Vyberte prosím účet k propojení"
+      "bindRequired": "Vyberte prosím účet k propojení",
+      "optional": "Volitelné",
+      "launchMode": "Způsob spuštění",
+      "launchModeApp": "Aplikace",
+      "launchModeCli": "Režim CLI",
+      "workingDir": "Pracovní adresář",
+      "workingDirPlaceholder": "Výchozí je aktuální cesta",
+      "workingDirDesc": "Při spuštění se nejdřív přepne do tohoto adresáře"
     },
     "quota": {
       "unbound": "Účet není propojen",
@@ -390,7 +400,7 @@
       "allAlreadyRunning": "Všechny instance již běží",
       "noneRunning": "Nebyly nalezeny žádné běžící instance",
       "syncThreadsNeedTwo": "Pro synchronizaci vláken jsou potřeba alespoň dvě instance",
-      "launchPrepared": "Příkaz spuštění je připraven"
+      "launchPrepared": "Příkaz ke spuštění je připraven"
     },
     "runningDialog": {
       "title": "Instance již běží",
@@ -455,11 +465,11 @@
       "submit": "Importovat"
     },
     "launchDialog": {
-      "command": "Příkaz spuštění",
-      "hint": "Zkopírujte příkaz a spusťte jej ručně, nebo jej spusťte přímo přes terminál tlačítkem níže.",
-      "runInTerminal": "Spustit v terminálu",
+      "title": "Spustit instanci",
       "terminal": "Terminál",
-      "title": "Spustit instanci"
+      "command": "Příkaz ke spuštění",
+      "hint": "Zkopírujte příkaz a spusťte ho ručně, nebo ho spusťte přímo v terminálu.",
+      "runInTerminal": "Spustit v terminálu"
     }
   },
   "settings": {
@@ -717,7 +727,93 @@
       "download": "Stáhnout",
       "checkFailed": "Kontrola aktualizací selhala"
     },
-    "saveSettings": "Uložit nastavení"
+    "saveSettings": "Uložit nastavení",
+    "transfer": {
+      "backup": {
+        "title": "Správa záloh",
+        "desc": "Spravujte plánované zálohy, složku se zálohami i seznam souborů na jednom místě.",
+        "modalDesc": "Nastavte automatické zálohování, procházejte soubory uložené ve složce záloh projektu a obnovujte nebo čistěte je zde.",
+        "statusEnabled": "Automatické zálohování je zapnuté",
+        "statusDisabled": "Automatické zálohování je vypnuté",
+        "lastRunLabel": "Poslední záloha: {{time}}",
+        "lastRunNever": "Zatím nebyla vytvořena žádná záloha",
+        "autoTitle": "Plánovaná záloha",
+        "autoDesc": "Po zapnutí se každý den exportuje jedna záloha a lze ji obnovit přes aktuální import.",
+        "runNow": "Zálohovat teď",
+        "running": "Zálohování...",
+        "typeTitle": "Typ zálohy",
+        "typeDesc": "Vyberte rozsah dat pro automatické zálohování.",
+        "typeFull": "Kompletní data",
+        "typeAccounts": "Pouze účty",
+        "typeConfig": "Pouze nastavení",
+        "retentionTitle": "Doba uchování",
+        "retentionDesc": "Zálohy starší než tato hodnota se při další kontrole odstraní.",
+        "retentionUnit": "dní",
+        "directoryTitle": "Složka záloh",
+        "directoryDesc": "Zálohy se vždy ukládají do složky backups projektu.",
+        "openFolder": "Otevřít složku",
+        "listTitle": "Seznam záloh",
+        "listDesc": "Zálohu můžete přímo importovat nebo odstranit staré soubory.",
+        "openList": "Otevřít seznam",
+        "emptyTitle": "Zatím žádné zálohy",
+        "emptyDesc": "Zapněte automatické zálohování nebo klikněte na „Zálohovat teď“ a vytvořte zde obnovitelné JSON zálohy.",
+        "sourceAuto": "Automaticky",
+        "sourceManual": "Ručně",
+        "fileTime": "Čas: {{time}}",
+        "fileSize": "Velikost: {{size}}",
+        "importAction": "Importovat",
+        "deleteAction": "Smazat",
+        "deleteConfirm": "Smazat zálohu {{name}}?",
+        "feedback": {
+          "running": "Vytváří se záloha...",
+          "runSuccess": "Záloha byla uložena do {{path}}",
+          "runSuccessWithCleanup": "Záloha byla uložena do {{path}} a bylo vyčištěno {{count}} starých záloh",
+          "runFailed": "Zálohování selhalo: {{error}}",
+          "deleteSuccess": "Záloha byla smazána",
+          "deleteFailed": "Smazání zálohy selhalo: {{error}}",
+          "loadFailed": "Načtení seznamu záloh selhalo: {{error}}",
+          "saveSettingsFailed": "Uložení nastavení záloh selhalo: {{error}}",
+          "cleanupDone": "Bylo vyčištěno {{count}} starých záloh",
+          "cleanupFailed": "Vyčištění starých záloh selhalo: {{error}}",
+          "openFolderFailed": "Otevření složky se zálohami selhalo: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "Doba uchování musí být mezi 1 a 365 dny"
+        }
+      },
+      "exportTitle": "Export dat",
+      "exportDesc": "Podle potřeby exportujte data účtů, konfigurační data nebo celý migrační balíček.",
+      "importTitle": "Import dat",
+      "importDesc": "Importujte zálohy účtů, zálohy konfigurace nebo jednotný datový balíček.",
+      "exportModalDesc": "Vyberte, co chcete exportovat. Pro úplný migrační balíček zvolte účty i konfiguraci.",
+      "importModalDesc": "Vyberte, co chcete importovat. Starší zálohy účtů se zpracují jako import pouze účtů.",
+      "selectionTitle": "Rozsah dat",
+      "accountsOptionTitle": "Data účtů",
+      "accountsOptionDesc": "Obsahuje zálohy účtů jednotlivých platforem a zachovává kompatibilitu se starším JSON účtů.",
+      "configOptionTitle": "Konfigurační data",
+      "configOptionDesc": "Obsahuje nastavení aplikace, skupiny, instance, úlohy probuzení a konfiguraci poskytovatelů modelů.",
+      "exportConfirm": "Exportovat data",
+      "fromFileTitle": "Import ze souboru",
+      "fromFileDesc": "Vyberte soubor JSON k importu. Podporují se i starší zálohy účtů.",
+      "jsonPlaceholder": "Vložte datový balíček nebo starší JSON účtů",
+      "feedback": {
+        "accountsImported": "Importováno {{count}} účtů",
+        "configImported": "Konfigurační data byla obnovena",
+        "accountsSectionMissing": "Záloha neobsahuje data účtů",
+        "configSectionMissing": "Záloha neobsahuje konfigurační data, proto byla obnovena jen data účtů",
+        "unresolvedRefs": "{{count}} vazeb účtů se nepodařilo spárovat a byly přeskočeny",
+        "disabledTasks": "{{count}} úloh bylo zakázáno, protože nebylo možné spárovat účet",
+        "restartRequired": "Nastavení síťové služby byla obnovena. Některé změny se projeví až po restartu",
+        "partialAccountFailure": "Import některých účtů selhal: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "Vyberte alespoň jeden typ dat",
+        "accountsOnlyFile": "Tato záloha obsahuje jen data účtů. Pro import vyberte „Data účtů“",
+        "selectedSectionsMissing": "Vybraný typ dat v této záloze chybí",
+        "unsupportedLegacyFile": "Tento starší formát zálohy účtů nebyl rozpoznán",
+        "unsupportedVersion": "Tato verze aplikace tuto verzi balíčku nepodporuje"
+      }
+    }
   },
   "appPath": {
     "missing": {
@@ -1735,7 +1831,8 @@
         "syncSessions": "Synchronizovat relace",
         "expand": "Rozbalit",
         "collapse": "Sbalit",
-        "repairVisibility": "Opravit viditelnost"
+        "repairVisibility": "Opravit viditelnost",
+        "restoreSessions": "Obnovit relace"
       },
       "confirm": {
         "title": "Přesunout do koše",
@@ -1749,12 +1846,20 @@
       },
       "messages": {
         "pickOne": "Vyberte prosím alespoň jednu relaci",
-        "syncNeedTwo": "Pro synchronizaci relací jsou potřeba alespoň dvě instance"
+        "syncNeedTwo": "Pro synchronizaci relací jsou potřeba alespoň dvě instance",
+        "pickRestoreOne": "Vyberte prosím alespoň jednu relaci k obnovení"
       },
       "groupCount": "{{count}} relací",
       "updatedAt": "Aktualizováno",
       "locationRunning": " (spuštěno)",
-      "untitled": "Nepojmenovaná relace"
+      "untitled": "Nepojmenovaná relace",
+      "restoreModal": {
+        "title": "Obnovit relace",
+        "hint": "Při obnovení se soubor rollout, řádek vlákna v SQLite a záznam session_index vrátí společně do původní instance.",
+        "emptyTitle": "Koš je prázdný",
+        "emptyDesc": "Relace přesunuté do koše se zobrazí zde.",
+        "restoreAction": "Obnovit vybrané relace"
+      }
     },
     "api": {
       "baseUrl": "Základní URL",
@@ -1880,7 +1985,41 @@
       "selectSavedApiKey": "Uložené API klíče",
       "noSavedProviders": "Zatím nejsou uloženi žádní poskytovatelé. Pole můžete vyplnit přímo a vše se uloží automaticky.",
       "newProviderName": "Název poskytovatele (volitelné, používá se pro automatické uložení)",
-      "newProviderNamePlaceholder": "Pokud zůstane prázdné, automaticky se použije hostname"
+      "newProviderNamePlaceholder": "Pokud zůstane prázdné, automaticky se použije hostname",
+      "preview": {
+        "title": "Náhled uložení",
+        "desc": "Při uložení poskytovatele se nejdřív aktualizuje úložiště poskytovatelů. Aktuální oficiální konfigurace Codexu se hned nepřepne.",
+        "writeNow": "Zapíše se",
+        "noImmediateChange": "Bez okamžité změny",
+        "providerStoreTitle": "Úložiště poskytovatelů",
+        "providerStoreDesc": "Uloží název poskytovatele, Base URL, odkazy na web/API Key a nový API klíč přidaný v tomto dialogu.",
+        "codexConfigTitle": "Aktuální konfigurace Codexu",
+        "codexConfigDesc": "Aktuální provider ani Base URL se hned nezmění. Tento soubor se aktualizuje až při uložení nebo přepnutí účtu Codex API Key.",
+        "authFileTitle": "Aktuální přihlašovací údaje Codexu",
+        "authFileDesc": "Uložení poskytovatele nepřepíše aktuální OPENAI_API_KEY v auth.json."
+      },
+      "quickConfig": {
+        "title": "Aktuální konfigurace Codexu",
+        "desc": "Tato rychlá nastavení zapisují přímo do aktivního ~/.codex/config.toml a nemění úložiště poskytovatelů modelů.",
+        "configPath": "Konfigurační soubor",
+        "openConfig": "Otevřít soubor",
+        "loadFailed": "Nepodařilo se načíst aktuální konfiguraci Codexu: {{error}}",
+        "openFailed": "Nepodařilo se otevřít config.toml: {{error}}",
+        "saveSuccess": "Aktuální konfigurace Codexu byla uložena.",
+        "saveFailed": "Nepodařilo se uložit aktuální konfiguraci Codexu: {{error}}",
+        "contextWindow1m": "1M kontextové okno",
+        "contextWindow1mHint": "Při zapnutí zapíše model_context_window = 1000000 a společně spravuje limit automatického zkracování.",
+        "autoCompactLimit": "Limit auto-compact",
+        "autoCompactLimitHint": "Zapíše model_auto_compact_token_limit. Při vypnutí přepínače 1M se toto pole také odstraní.",
+        "preview": "Náhled zápisu",
+        "previewApply": "Zapíše se",
+        "previewRemove": "Odstraní se",
+        "customDetected": "V config.toml byl zjištěn vlastní model_context_window = {{context}}. Po uložení se přepíše podle rychlého nastavení níže.",
+        "compactMissingDetected": "1M kontext je už zapnutý, ale chybí limit auto-compact. Po uložení se doplní výchozí hodnota {{limit}}.",
+        "validation": {
+          "autoCompactInvalid": "Limit auto-compact musí být celé číslo větší než 0."
+        }
+      }
     },
     "quickSwitch": {
       "action": "Rychle přepnout poskytovatele",
@@ -2140,8 +2279,7 @@
       "description": "Klikněte na „Přidat účet“"
     },
     "addModal": {
-      "title": "Přidat účet Windsurf",
-      "password": "E-mail a heslo"
+      "title": "Přidat účet Windsurf"
     },
     "oauth": {
       "desc": "Klikněte níže a dokončete autorizaci Windsurf v prohlížeči."
@@ -2184,16 +2322,6 @@
       "inject": "Přepnutí jedním kliknutím: Tento nástroj načte lokální šifrovací materiál Windsurf (DPAPI/Keychain/Secret Service), dešifruje autentizační relaci ve state.vscdb, nahradí token Windsurf a znovu ji zašifruje — vše lokálně na vašem zařízení.",
       "reason": "Rozsah oprávnění: čtení databáze ověření Windsurf (state.vscdb) a volání systémového šifrování (Windows DPAPI / macOS Keychain / Linux Secret Service) pro dešifrování a zpětný zápis.",
       "storage": "Rozsah čtení: zpracovávají se pouze položky související s relací přihlášení Windsurf a veškeré procesy probíhají lokálně."
-    },
-    "password": {
-      "desc": "Přihlaste se e-mailem a heslem účtu Windsurf, automaticky se získá API klíč a informace o účtu.",
-      "emailPlaceholder": "E-mailová adresa",
-      "passwordPlaceholder": "Heslo",
-      "login": "Přihlásit se",
-      "logging": "Přihlašování...",
-      "empty": "Zadejte e-mail a heslo",
-      "success": "Přihlášení úspěšné: {{login}}",
-      "failed": "Přihlášení se nezdařilo: {{error}}"
     }
   },
   "kiro": {
@@ -2683,6 +2811,26 @@
       "saved": "Projekt uložen: {{projectId}}",
       "cleared": "Obnoveno automatické zjišťování projektu",
       "savedWithRefreshError": "Projekt byl uložen, ale obnovení kvóty selhalo: {{error}}"
+    },
+    "identity": {
+      "authMethod": "Způsob přihlášení",
+      "tier": "Tarif",
+      "signedInWithGoogle": "Přihlášeno přes Google",
+      "signedInWithGoogleEmail": "Přihlášeno přes Google ({{email}})"
+    },
+    "quotaTable": {
+      "model": "Název modelu",
+      "leftOfTotal": "Zbývá / Celkem",
+      "usage": "Využito",
+      "usageResets": "Reset využití",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist v Google One AI Pro",
+      "ultra": "Gemini Code Assist v Google AI Ultra",
+      "free": "Gemini Code Assist zdarma"
     }
   },
   "codebuddy": {

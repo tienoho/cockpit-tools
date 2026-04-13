@@ -139,10 +139,11 @@
       },
       "quota": {
         "noData": "Tidak ada data kuota",
+        "queryFailed": "Kueri kuota gagal",
         "resetDone": "Direset",
         "hourly": "Saran Inline",
         "weekly": "Pesan obrolan",
-        "resetAt": "Reset: {{time}}"
+        "resetAt": "Atur ulang: {{time}}"
       },
       "subtitle": "Pantau status kuota seluruh akun secara real-time.",
       "time": {
@@ -367,7 +368,8 @@
       "running": "Berjalan",
       "stopped": "Berhenti",
       "restarting": "Memulai Ulang",
-      "starting": "Memulai"
+      "starting": "Memulai",
+      "ready": "Siap"
     },
     "labels": {
       "path": "Direktori",
@@ -377,7 +379,8 @@
       "unbound": "Belum Ditautkan",
       "pendingInit": "Menunggu inisialisasi (jalankan sekali)",
       "quota": "Kuota",
-      "lastLaunched": "Terakhir Diluncurkan"
+      "lastLaunched": "Terakhir Diluncurkan",
+      "argsPresent": "Arg aktif"
     },
     "columns": {
       "instance": "Instansi",
@@ -427,7 +430,14 @@
       "extraArgsDesc": "Pisahkan argumen dengan spasi, tanda kutip didukung",
       "nameRequired": "Silakan masukkan nama instansi",
       "pathRequired": "Silakan pilih direktori instansi",
-      "bindRequired": "Silakan pilih akun untuk ditautkan"
+      "bindRequired": "Silakan pilih akun untuk ditautkan",
+      "optional": "Opsional",
+      "launchMode": "Mode peluncuran",
+      "launchModeApp": "Aplikasi desktop",
+      "launchModeCli": "Mode CLI",
+      "workingDir": "Direktori kerja",
+      "workingDirPlaceholder": "Default ke path saat ini",
+      "workingDirDesc": "Saat startup, akan pindah ke direktori ini terlebih dulu"
     },
     "quota": {
       "unbound": "Tidak ada akun tertaut",
@@ -448,7 +458,7 @@
       "allAlreadyRunning": "Semua instansi sudah berjalan",
       "noneRunning": "Tidak ditemukan instansi yang sedang berjalan",
       "syncThreadsNeedTwo": "Diperlukan setidaknya dua instansi untuk menyinkronkan thread",
-      "launchPrepared": "Perintah peluncuran telah disiapkan"
+      "launchPrepared": "Perintah peluncuran siap"
     },
     "runningDialog": {
       "title": "Instansi sudah berjalan",
@@ -501,11 +511,11 @@
       "message": "Hapus instansi {{name}}? Tindakan ini akan menghapus konfigurasi dan folder instansi."
     },
     "launchDialog": {
-      "command": "Perintah Peluncuran",
-      "hint": "Salin perintah dan jalankan secara manual, atau jalankan langsung di terminal menggunakan tombol di bawah.",
-      "runInTerminal": "Jalankan di Terminal",
-      "terminal": "Terminal",
-      "title": "Jalankan Instans"
+      "title": "Luncurkan instans",
+      "terminal": "Jendela terminal",
+      "command": "Perintah peluncuran",
+      "hint": "Salin perintah lalu jalankan secara manual, atau eksekusi langsung di terminal.",
+      "runInTerminal": "Jalankan di terminal"
     }
   },
   "settings": {
@@ -763,7 +773,93 @@
       "download": "Unduh",
       "checkFailed": "Gagal memeriksa pembaruan, silakan coba lagi"
     },
-    "saveSettings": "Simpan Pengaturan"
+    "saveSettings": "Simpan Pengaturan",
+    "transfer": {
+      "backup": {
+        "title": "Manajer cadangan",
+        "desc": "Kelola cadangan terjadwal, folder cadangan, dan daftar file dari satu tempat.",
+        "modalDesc": "Atur cadangan otomatis, telusuri file yang tersimpan di folder cadangan proyek, lalu pulihkan atau bersihkan di sini.",
+        "statusEnabled": "Cadangan otomatis aktif",
+        "statusDisabled": "Cadangan otomatis nonaktif",
+        "lastRunLabel": "Cadangan terakhir: {{time}}",
+        "lastRunNever": "Belum ada cadangan",
+        "autoTitle": "Cadangan terjadwal",
+        "autoDesc": "Saat diaktifkan, satu cadangan diekspor setiap hari dan dapat dipulihkan melalui impor saat ini.",
+        "runNow": "Cadangkan sekarang",
+        "running": "Mencadangkan...",
+        "typeTitle": "Jenis cadangan",
+        "typeDesc": "Pilih cakupan data untuk cadangan otomatis.",
+        "typeFull": "Data lengkap",
+        "typeAccounts": "Akun saja",
+        "typeConfig": "Konfigurasi saja",
+        "retentionTitle": "Masa simpan",
+        "retentionDesc": "Cadangan yang lebih lama dari ini akan dihapus saat pemeriksaan berikutnya.",
+        "retentionUnit": "hari",
+        "directoryTitle": "Folder cadangan",
+        "directoryDesc": "Cadangan selalu disimpan di folder backups milik proyek.",
+        "openFolder": "Buka folder",
+        "listTitle": "Daftar cadangan",
+        "listDesc": "Impor cadangan secara langsung atau hapus file lama.",
+        "openList": "Buka daftar",
+        "emptyTitle": "Belum ada cadangan",
+        "emptyDesc": "Aktifkan cadangan otomatis atau klik \"Cadangkan sekarang\" untuk membuat cadangan JSON yang dapat dipulihkan di sini.",
+        "sourceAuto": "Otomatis",
+        "sourceManual": "Mode manual",
+        "fileTime": "Waktu: {{time}}",
+        "fileSize": "Ukuran: {{size}}",
+        "importAction": "Impor",
+        "deleteAction": "Hapus",
+        "deleteConfirm": "Hapus cadangan {{name}}?",
+        "feedback": {
+          "running": "Membuat cadangan...",
+          "runSuccess": "Cadangan disimpan ke {{path}}",
+          "runSuccessWithCleanup": "Cadangan disimpan ke {{path}} dan {{count}} cadangan kedaluwarsa dibersihkan",
+          "runFailed": "Cadangan gagal: {{error}}",
+          "deleteSuccess": "Cadangan dihapus",
+          "deleteFailed": "Gagal menghapus cadangan: {{error}}",
+          "loadFailed": "Gagal memuat daftar cadangan: {{error}}",
+          "saveSettingsFailed": "Gagal menyimpan pengaturan cadangan: {{error}}",
+          "cleanupDone": "{{count}} cadangan kedaluwarsa dibersihkan",
+          "cleanupFailed": "Gagal membersihkan cadangan kedaluwarsa: {{error}}",
+          "openFolderFailed": "Gagal membuka folder cadangan: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "Masa simpan harus antara 1 dan 365 hari"
+        }
+      },
+      "exportTitle": "Ekspor data",
+      "exportDesc": "Ekspor data akun, data konfigurasi, atau paket migrasi penuh sesuai kebutuhan.",
+      "importTitle": "Impor data",
+      "importDesc": "Impor cadangan akun, cadangan konfigurasi, atau paket data terpadu.",
+      "exportModalDesc": "Pilih data yang ingin diekspor. Pilih akun dan konfigurasi sekaligus untuk paket migrasi penuh.",
+      "importModalDesc": "Pilih data yang ingin diimpor. Cadangan akun lama akan diproses sebagai impor akun saja.",
+      "selectionTitle": "Cakupan data",
+      "accountsOptionTitle": "Data akun",
+      "accountsOptionDesc": "Mencakup cadangan akun platform dan tetap kompatibel dengan JSON akun lama.",
+      "configOptionTitle": "Data konfigurasi",
+      "configOptionDesc": "Mencakup pengaturan aplikasi, grup, instance, tugas wakeup, dan konfigurasi penyedia model.",
+      "exportConfirm": "Ekspor data",
+      "fromFileTitle": "Impor dari file",
+      "fromFileDesc": "Pilih file JSON untuk diimpor. Cadangan akun lama juga didukung di sini.",
+      "jsonPlaceholder": "Tempel paket data atau JSON akun lama",
+      "feedback": {
+        "accountsImported": "Berhasil mengimpor {{count}} akun",
+        "configImported": "Data konfigurasi dipulihkan",
+        "accountsSectionMissing": "Cadangan ini tidak memuat data akun",
+        "configSectionMissing": "Cadangan ini tidak memuat data konfigurasi, jadi hanya data akun yang dipulihkan",
+        "unresolvedRefs": "{{count}} keterkaitan akun tidak dapat dicocokkan dan dilewati",
+        "disabledTasks": "{{count}} tugas dinonaktifkan karena tidak ada akun yang cocok",
+        "restartRequired": "Pengaturan layanan jaringan telah dipulihkan. Sebagian perubahan berlaku setelah restart",
+        "partialAccountFailure": "Sebagian impor akun gagal: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "Pilih setidaknya satu jenis data",
+        "accountsOnlyFile": "Cadangan ini hanya berisi data akun. Pilih \"Data akun\" untuk mengimpornya",
+        "selectedSectionsMissing": "Jenis data yang dipilih tidak ada di cadangan ini",
+        "unsupportedLegacyFile": "Format cadangan akun lama ini tidak dikenali",
+        "unsupportedVersion": "Versi aplikasi ini tidak mendukung versi bundel tersebut"
+      }
+    }
   },
   "appPath": {
     "missing": {
@@ -1864,7 +1960,8 @@
         "syncSessions": "Sinkronkan Sesi",
         "expand": "Perluas",
         "collapse": "Ciutkan",
-        "repairVisibility": "Perbaiki visibilitas"
+        "repairVisibility": "Perbaiki visibilitas",
+        "restoreSessions": "Pulihkan sesi"
       },
       "confirm": {
         "title": "Pindahkan ke Sampah",
@@ -1878,12 +1975,20 @@
       },
       "messages": {
         "pickOne": "Silakan pilih setidaknya satu sesi",
-        "syncNeedTwo": "Setidaknya dua instansi diperlukan untuk menyinkronkan sesi"
+        "syncNeedTwo": "Setidaknya dua instansi diperlukan untuk menyinkronkan sesi",
+        "pickRestoreOne": "Pilih setidaknya satu sesi untuk dipulihkan"
       },
       "groupCount": "{{count}} sesi",
       "updatedAt": "Diperbarui",
       "locationRunning": " (berjalan)",
-      "untitled": "Sesi tanpa judul"
+      "untitled": "Sesi tanpa judul",
+      "restoreModal": {
+        "title": "Pulihkan sesi",
+        "hint": "Saat dipulihkan, file rollout, baris thread SQLite, dan entri session_index akan dikembalikan bersama ke instance asal.",
+        "emptyTitle": "Trash kosong",
+        "emptyDesc": "Sesi yang dipindahkan ke Trash akan muncul di sini.",
+        "restoreAction": "Pulihkan sesi terpilih"
+      }
     },
     "modelProviders": {
       "tab": "Penyedia model",
@@ -1926,7 +2031,41 @@
       "selectSavedApiKey": "API Key tersimpan",
       "noSavedProviders": "Belum ada penyedia tersimpan. Anda bisa mengisi field secara langsung dan data akan disimpan otomatis.",
       "newProviderName": "Nama penyedia (opsional, dipakai untuk simpan otomatis)",
-      "newProviderNamePlaceholder": "Jika kosong, nama host akan dipakai otomatis"
+      "newProviderNamePlaceholder": "Jika kosong, nama host akan dipakai otomatis",
+      "preview": {
+        "title": "Pratinjau simpan",
+        "desc": "Menyimpan penyedia akan memperbarui penyimpanan penyedia lebih dulu. Konfigurasi resmi Codex saat ini tidak langsung berpindah.",
+        "writeNow": "Akan ditulis",
+        "noImmediateChange": "Tidak langsung berubah",
+        "providerStoreTitle": "Penyimpanan penyedia",
+        "providerStoreDesc": "Menyimpan nama penyedia, Base URL, tautan situs/halaman API Key, dan API Key baru yang ditambahkan di dialog ini.",
+        "codexConfigTitle": "Konfigurasi Codex saat ini",
+        "codexConfigDesc": "Penyedia atau Base URL saat ini tidak langsung berubah. File itu hanya diperbarui saat akun Codex API key disimpan atau diganti.",
+        "authFileTitle": "Kredensial Codex saat ini",
+        "authFileDesc": "Menyimpan penyedia tidak akan menimpa OPENAI_API_KEY saat ini di auth.json."
+      },
+      "quickConfig": {
+        "title": "Konfigurasi Codex saat ini",
+        "desc": "Pengaturan cepat ini menulis langsung ke ~/.codex/config.toml yang aktif dan tidak mengubah penyimpanan penyedia model.",
+        "configPath": "File konfigurasi",
+        "openConfig": "Buka file",
+        "loadFailed": "Gagal memuat konfigurasi Codex saat ini: {{error}}",
+        "openFailed": "Gagal membuka config.toml: {{error}}",
+        "saveSuccess": "Konfigurasi Codex saat ini telah disimpan.",
+        "saveFailed": "Gagal menyimpan konfigurasi Codex saat ini: {{error}}",
+        "contextWindow1m": "Jendela konteks 1M",
+        "contextWindow1mHint": "Saat diaktifkan, akan menulis model_context_window = 1000000 dan mengelola batas auto-compact bersama-sama.",
+        "autoCompactLimit": "Batas auto-compact",
+        "autoCompactLimitHint": "Menulis model_auto_compact_token_limit. Saat sakelar 1M dimatikan, field ini juga akan dihapus.",
+        "preview": "Pratinjau penulisan",
+        "previewApply": "Akan ditulis",
+        "previewRemove": "Akan dihapus",
+        "customDetected": "Terdeteksi model_context_window = {{context}} kustom di config.toml. Menyimpan akan menulis ulang nilainya sesuai pengaturan cepat di bawah.",
+        "compactMissingDetected": "Konteks 1M sudah aktif, tetapi batas auto-compact belum ada. Menyimpan akan menulis nilai default {{limit}}.",
+        "validation": {
+          "autoCompactInvalid": "Batas auto-compact harus berupa bilangan bulat lebih besar dari 0."
+        }
+      }
     },
     "quickSwitch": {
       "action": "Alih cepat penyedia",
@@ -2286,8 +2425,7 @@
       "description": "Klik \"Tambah Akun\" untuk mulai mengelola akun Windsurf Anda"
     },
     "addModal": {
-      "title": "Tambah Akun Windsurf",
-      "password": "Email & Kata Sandi"
+      "title": "Tambah Akun Windsurf"
     },
     "oauth": {
       "desc": "Klik tombol di bawah ini dan selesaikan otorisasi Windsurf di peramban Anda."
@@ -2330,16 +2468,6 @@
       "inject": "Penggantian satu klik: Alat ini membaca materi enkripsi lokal Windsurf (DPAPI/Keychain/Secret Service), memproses sesi auth di state.vscdb, menulis kembali token Windsurf, dan menjaga semuanya lokal di mesin Anda.",
       "reason": "Cakupan izin: baca database auth Windsurf (state.vscdb) dan gunakan kemampuan enkripsi sistem (Windows DPAPI / macOS Keychain / Linux Secret Service) untuk mendekripsi dan menulis kembali data sesi auth.",
       "storage": "Cakupan data: hanya entri terkait sesi auth Windsurf yang dibaca/diperbarui; semua proses berjalan secara lokal."
-    },
-    "password": {
-      "desc": "Masuk dengan email dan kata sandi akun Windsurf Anda untuk mengambil kunci API dan info akun secara otomatis.",
-      "emailPlaceholder": "Alamat email",
-      "passwordPlaceholder": "Kata sandi",
-      "login": "Masuk",
-      "logging": "Masuk...",
-      "empty": "Silakan masukkan email dan kata sandi",
-      "success": "Masuk: {{login}}",
-      "failed": "Masuk gagal: {{error}}"
     }
   },
   "kiro": {
@@ -2508,6 +2636,26 @@
       "desc": "Kelola akun Gemini Cli dengan mengimpor dari konfigurasi Gemini Cli lokal, menempelkan token JWT, atau masuk melalui OAuth.",
       "reason": "Cakupan izin: baca dan tulis oauth_creds.json, google_accounts.json, dan settings.json di bawah ~/.gemini default atau jalur instansi (GEMINI_CLI_HOME/.gemini) untuk impor akun dan injeksi kredensial lokal (penggantian akun).",
       "storage": "Cakupan jaringan: OAuth dan penyegaran memanggil API resmi Google/Gemini (seperti oauth2.googleapis.com dan googleapis.com). Hanya bidang auth/kuota yang diperlukan yang dikirim; berkas akun lokal tidak diunggah ke server pihak ketiga."
+    },
+    "identity": {
+      "authMethod": "Metode autentikasi",
+      "tier": "Paket",
+      "signedInWithGoogle": "Masuk dengan Google",
+      "signedInWithGoogleEmail": "Masuk dengan Google ({{email}})"
+    },
+    "quotaTable": {
+      "model": "Nama model",
+      "leftOfTotal": "Sisa / Total",
+      "usage": "Terpakai",
+      "usageResets": "Reset penggunaan",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist di Google One AI Pro",
+      "ultra": "Gemini Code Assist di Google AI Ultra",
+      "free": "Gemini Code Assist gratis"
     }
   },
   "breakout": {

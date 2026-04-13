@@ -139,6 +139,7 @@
       },
       "quota": {
         "noData": "No quota data",
+        "queryFailed": "Quota query failed",
         "resetDone": "Reset",
         "hourly": "Inline Suggestions",
         "weekly": "Chat messages",
@@ -524,6 +525,92 @@
       "general": "General",
       "network": "Network",
       "about": "About"
+    },
+    "transfer": {
+      "backup": {
+        "title": "Backup Manager",
+        "desc": "Manage scheduled backups, the backup folder, and backup files in one place.",
+        "modalDesc": "Configure automatic backups, browse files stored in the project backup folder, and restore or clean them up here.",
+        "statusEnabled": "Auto backup is on",
+        "statusDisabled": "Auto backup is off",
+        "lastRunLabel": "Last backup: {{time}}",
+        "lastRunNever": "Not backed up yet",
+        "autoTitle": "Scheduled Backup",
+        "autoDesc": "When enabled, one backup is exported per day and stays restorable with the current import flow.",
+        "runNow": "Back Up Now",
+        "running": "Backing up...",
+        "typeTitle": "Backup Type",
+        "typeDesc": "Choose which data scope to back up automatically.",
+        "typeFull": "Full Data",
+        "typeAccounts": "Accounts Only",
+        "typeConfig": "Config Only",
+        "retentionTitle": "Retention",
+        "retentionDesc": "Backups older than this are removed during the next check.",
+        "retentionUnit": "days",
+        "directoryTitle": "Backup Folder",
+        "directoryDesc": "Backups are always saved in the project's backups folder.",
+        "openFolder": "Open Folder",
+        "listTitle": "Backup List",
+        "listDesc": "Import a backup directly or remove old files.",
+        "openList": "Open List",
+        "emptyTitle": "No backups yet",
+        "emptyDesc": "Turn on auto backup or click \"Back Up Now\" to create restorable JSON backups here.",
+        "sourceAuto": "Auto",
+        "sourceManual": "Manual",
+        "fileTime": "Time: {{time}}",
+        "fileSize": "Size: {{size}}",
+        "importAction": "Import",
+        "deleteAction": "Delete",
+        "deleteConfirm": "Delete backup {{name}}?",
+        "feedback": {
+          "running": "Creating backup...",
+          "runSuccess": "Backup saved to {{path}}",
+          "runSuccessWithCleanup": "Backup saved to {{path}} and cleaned up {{count}} expired backup(s)",
+          "runFailed": "Backup failed: {{error}}",
+          "deleteSuccess": "Backup deleted",
+          "deleteFailed": "Failed to delete backup: {{error}}",
+          "loadFailed": "Failed to load backup list: {{error}}",
+          "saveSettingsFailed": "Failed to save backup settings: {{error}}",
+          "cleanupDone": "Cleaned up {{count}} expired backup(s)",
+          "cleanupFailed": "Failed to clean up expired backups: {{error}}",
+          "openFolderFailed": "Failed to open backup folder: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "Retention must be between 1 and 365 days"
+        }
+      },
+      "exportTitle": "Data Export",
+      "exportDesc": "Export account data, config data, or a full migration bundle as needed.",
+      "importTitle": "Data Import",
+      "importDesc": "Import account backups, config backups, or the unified data bundle.",
+      "exportModalDesc": "Choose what to export. Select both accounts and config for a full migration bundle.",
+      "importModalDesc": "Choose what to import. Legacy account backups are handled as account-only imports.",
+      "selectionTitle": "Data Scope",
+      "accountsOptionTitle": "Account Data",
+      "accountsOptionDesc": "Includes platform account backups and keeps legacy account JSON compatible.",
+      "configOptionTitle": "Config Data",
+      "configOptionDesc": "Includes app settings, groups, instances, wakeup tasks, and model provider config.",
+      "exportConfirm": "Export Data",
+      "fromFileTitle": "Import From File",
+      "fromFileDesc": "Pick a JSON file to import. Legacy account backups are also supported here.",
+      "jsonPlaceholder": "Paste a data bundle or legacy account JSON",
+      "feedback": {
+        "accountsImported": "Imported {{count}} accounts",
+        "configImported": "Config data restored",
+        "accountsSectionMissing": "The backup does not include account data",
+        "configSectionMissing": "The backup does not include config data, so only account data was restored",
+        "unresolvedRefs": "{{count}} account bindings could not be matched and were skipped",
+        "disabledTasks": "{{count}} tasks were disabled because no account could be matched",
+        "restartRequired": "Network service settings were restored. Some changes take effect after restart",
+        "partialAccountFailure": "Some account imports failed: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "Select at least one data type",
+        "accountsOnlyFile": "This backup only contains account data. Select \"Account Data\" to import it",
+        "selectedSectionsMissing": "The selected data type is not present in this backup",
+        "unsupportedLegacyFile": "This legacy account backup format is not recognized",
+        "unsupportedVersion": "This app version does not support that bundle version"
+      }
     },
     "general": {
       "appearance": "Appearance",
@@ -1961,11 +2048,12 @@
     },
     "sessionManager": {
       "title": "Session Manager",
-      "desc": "Sync, visibility repair, and cleanup live here together: use the top actions to sync sessions or repair history visibility, then expand each project to review and trash sessions.",
+      "desc": "Sync, visibility repair, cleanup, and restore live here together: use the top actions to sync sessions, repair history visibility, or restore from Trash, then expand each project to review and trash sessions.",
       "actions": {
         "moveToTrash": "Move to Trash",
         "syncSessions": "Sync Sessions",
         "repairVisibility": "Repair Visibility",
+        "restoreSessions": "Restore Sessions",
         "expand": "Expand",
         "collapse": "Collapse"
       },
@@ -1981,12 +2069,20 @@
       },
       "messages": {
         "pickOne": "Please select at least one session",
+        "pickRestoreOne": "Please select at least one session to restore",
         "syncNeedTwo": "At least two instances are required to sync sessions"
       },
       "groupCount": "{{count}} sessions",
       "updatedAt": "Updated",
       "locationRunning": " (running)",
-      "untitled": "Untitled session"
+      "untitled": "Untitled session",
+      "restoreModal": {
+        "title": "Restore Sessions",
+        "hint": "Restoring puts the rollout file, SQLite thread row, and session_index entry back into the original instance together.",
+        "emptyTitle": "Trash is empty",
+        "emptyDesc": "Sessions moved to Trash will appear here.",
+        "restoreAction": "Restore Selected Sessions"
+      }
     },
     "groups": {
       "addToGroup": "Add to Group"
@@ -2329,8 +2425,7 @@
       "description": "Click \"Add Account\" to start managing your Windsurf accounts"
     },
     "addModal": {
-      "title": "Add Windsurf Account",
-      "password": "Email & Password"
+      "title": "Add Windsurf Account"
     },
     "oauth": {
       "desc": "Click the button below and complete Windsurf authorization in your browser."
@@ -2373,16 +2468,6 @@
       "inject": "One-click switching: This tool reads local Windsurf encryption material (DPAPI/Keychain/Secret Service), processes the auth session in state.vscdb, writes back the Windsurf token, and keeps everything local on your machine.",
       "reason": "Permission scope: read Windsurf auth database (state.vscdb) and use system encryption capabilities (Windows DPAPI / macOS Keychain / Linux Secret Service) to decrypt and write back auth-session data.",
       "storage": "Data scope: only Windsurf auth-session related entries are read/updated; all processes run locally."
-    },
-    "password": {
-      "desc": "Sign in with your Windsurf account email and password to automatically fetch API key and account info.",
-      "emailPlaceholder": "Email address",
-      "passwordPlaceholder": "Password",
-      "login": "Sign In",
-      "logging": "Signing in...",
-      "empty": "Please enter email and password",
-      "success": "Signed in: {{login}}",
-      "failed": "Sign-in failed: {{error}}"
     }
   },
   "kiro": {
@@ -2486,6 +2571,12 @@
   },
   "gemini": {
     "injectToGemini": "Switch to Gemini Cli",
+    "identity": {
+      "authMethod": "Auth Method",
+      "tier": "Tier",
+      "signedInWithGoogle": "Signed in with Google",
+      "signedInWithGoogleEmail": "Signed in with Google ({{email}})"
+    },
     "updated": {
       "label": "Updated {{relative}} ago"
     },
@@ -2497,6 +2588,20 @@
       "resetsSoon": "Resets soon",
       "resetsUnknown": "Reset time unknown",
       "onDemand": "On-Demand"
+    },
+    "quotaTable": {
+      "model": "Model",
+      "leftOfTotal": "Left / Total",
+      "usage": "Used",
+      "usageResets": "Usage resets",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist in Google One AI Pro",
+      "ultra": "Gemini Code Assist in Google AI Ultra",
+      "free": "Gemini Code Assist"
     },
     "title": "Gemini Cli Account",
     "instances": {

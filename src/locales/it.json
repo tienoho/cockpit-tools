@@ -132,10 +132,11 @@
       },
       "quota": {
         "noData": "Nessun dato quota",
+        "queryFailed": "Query quota non riuscita",
         "resetDone": "Reimpostato",
         "hourly": "Quota di 5 ore",
         "weekly": "Quota settimanale",
-        "resetAt": "Reset: {{time}}"
+        "resetAt": "Reimpostazione: {{time}}"
       },
       "subtitle": "Gestisci i tuoi account GitHub Copilot",
       "time": {
@@ -309,7 +310,8 @@
       "running": "In esecuzione",
       "stopped": "Fermato",
       "restarting": "Riavvio in corso",
-      "starting": "Di partenza"
+      "starting": "Di partenza",
+      "ready": "Pronta"
     },
     "labels": {
       "path": "Directory",
@@ -319,7 +321,8 @@
       "unbound": "Non collegato",
       "pendingInit": "In attesa di inizializzazione (avvia prima una volta)",
       "quota": "Quota",
-      "lastLaunched": "Ultimo avvio"
+      "lastLaunched": "Ultimo avvio",
+      "argsPresent": "Arg presenti"
     },
     "columns": {
       "instance": "Istanza",
@@ -369,7 +372,14 @@
       "extraArgsDesc": "Separa gli argomenti con spazi, le virgolette sono supportate",
       "nameRequired": "Inserisci un nome istanza",
       "pathRequired": "Seleziona una directory istanza",
-      "bindRequired": "Seleziona un account da collegare"
+      "bindRequired": "Seleziona un account da collegare",
+      "optional": "Facoltativo",
+      "launchMode": "Modalità di avvio",
+      "launchModeApp": "App desktop",
+      "launchModeCli": "Modalità CLI",
+      "workingDir": "Directory di lavoro",
+      "workingDirPlaceholder": "Per default usa il percorso corrente",
+      "workingDirDesc": "All'avvio passerà prima a questa directory"
     },
     "quota": {
       "unbound": "Account non collegato",
@@ -390,7 +400,7 @@
       "allAlreadyRunning": "Tutte le istanze sono già in esecuzione",
       "noneRunning": "Nessuna istanza in esecuzione trovata",
       "syncThreadsNeedTwo": "Sono necessarie almeno due istanze per sincronizzare i thread",
-      "launchPrepared": "Comando di avvio preparato"
+      "launchPrepared": "Il comando di avvio è pronto"
     },
     "runningDialog": {
       "title": "L'istanza è già in esecuzione",
@@ -455,11 +465,11 @@
       "submit": "Importa"
     },
     "launchDialog": {
-      "command": "Comando di avvio",
-      "hint": "Copia il comando ed eseguilo manualmente, oppure eseguilo direttamente nel terminale usando il pulsante in basso.",
-      "runInTerminal": "Esegui nel terminale",
+      "title": "Avvia istanza",
       "terminal": "Terminale",
-      "title": "Avvia istanza"
+      "command": "Comando di avvio",
+      "hint": "Copia il comando ed eseguilo manualmente, oppure avvialo direttamente nel terminale.",
+      "runInTerminal": "Esegui nel terminale"
     }
   },
   "settings": {
@@ -717,7 +727,93 @@
       "download": "Scarica",
       "checkFailed": "Controllo fallito"
     },
-    "saveSettings": "Salva Impostazioni"
+    "saveSettings": "Salva Impostazioni",
+    "transfer": {
+      "backup": {
+        "title": "Gestione backup",
+        "desc": "Gestisci backup pianificati, cartella dei backup ed elenco dei file in un unico posto.",
+        "modalDesc": "Configura i backup automatici, sfoglia i file salvati nella cartella di backup del progetto e ripristinali o ripuliscili qui.",
+        "statusEnabled": "Backup automatico attivo",
+        "statusDisabled": "Backup automatico disattivato",
+        "lastRunLabel": "Ultimo backup: {{time}}",
+        "lastRunNever": "Nessun backup ancora disponibile",
+        "autoTitle": "Backup pianificato",
+        "autoDesc": "Quando è attivo, viene esportato un backup al giorno e può essere ripristinato con l’import corrente.",
+        "runNow": "Esegui backup ora",
+        "running": "Backup in corso...",
+        "typeTitle": "Tipo di backup",
+        "typeDesc": "Scegli l’ambito dei dati da salvare automaticamente.",
+        "typeFull": "Dati completi",
+        "typeAccounts": "Solo account",
+        "typeConfig": "Solo configurazione",
+        "retentionTitle": "Conservazione",
+        "retentionDesc": "I backup più vecchi verranno rimossi al controllo successivo.",
+        "retentionUnit": "giorni",
+        "directoryTitle": "Cartella backup",
+        "directoryDesc": "I backup vengono sempre salvati nella cartella backups del progetto.",
+        "openFolder": "Apri cartella",
+        "listTitle": "Elenco backup",
+        "listDesc": "Importa un backup direttamente oppure elimina i file vecchi.",
+        "openList": "Apri elenco",
+        "emptyTitle": "Nessun backup disponibile",
+        "emptyDesc": "Attiva il backup automatico o fai clic su \"Esegui backup ora\" per creare qui backup JSON ripristinabili.",
+        "sourceAuto": "Automatico",
+        "sourceManual": "Manuale",
+        "fileTime": "Ora: {{time}}",
+        "fileSize": "Dimensione: {{size}}",
+        "importAction": "Importa",
+        "deleteAction": "Elimina",
+        "deleteConfirm": "Eliminare il backup {{name}}?",
+        "feedback": {
+          "running": "Creazione del backup...",
+          "runSuccess": "Backup salvato in {{path}}",
+          "runSuccessWithCleanup": "Backup salvato in {{path}} e {{count}} backup scaduti rimossi",
+          "runFailed": "Backup non riuscito: {{error}}",
+          "deleteSuccess": "Backup eliminato",
+          "deleteFailed": "Eliminazione del backup non riuscita: {{error}}",
+          "loadFailed": "Caricamento dell’elenco dei backup non riuscito: {{error}}",
+          "saveSettingsFailed": "Salvataggio delle impostazioni di backup non riuscito: {{error}}",
+          "cleanupDone": "{{count}} backup scaduti rimossi",
+          "cleanupFailed": "Pulizia dei backup scaduti non riuscita: {{error}}",
+          "openFolderFailed": "Apertura della cartella di backup non riuscita: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "La conservazione deve essere compresa tra 1 e 365 giorni"
+        }
+      },
+      "exportTitle": "Esportazione dati",
+      "exportDesc": "Esporta dati degli account, dati di configurazione o un pacchetto completo di migrazione secondo necessità.",
+      "importTitle": "Importazione dati",
+      "importDesc": "Importa backup degli account, backup della configurazione o il pacchetto dati unificato.",
+      "exportModalDesc": "Scegli cosa esportare. Seleziona account e configurazione insieme per un pacchetto completo di migrazione.",
+      "importModalDesc": "Scegli cosa importare. I vecchi backup account vengono gestiti come importazione solo account.",
+      "selectionTitle": "Ambito dati",
+      "accountsOptionTitle": "Dati account",
+      "accountsOptionDesc": "Include i backup degli account delle piattaforme e mantiene la compatibilità con il vecchio JSON degli account.",
+      "configOptionTitle": "Dati di configurazione",
+      "configOptionDesc": "Include impostazioni app, gruppi, istanze, attività di wakeup e configurazione dei provider di modelli.",
+      "exportConfirm": "Esporta dati",
+      "fromFileTitle": "Importa da file",
+      "fromFileDesc": "Scegli un file JSON da importare. Anche i vecchi backup account sono supportati qui.",
+      "jsonPlaceholder": "Incolla un pacchetto dati o il vecchio JSON degli account",
+      "feedback": {
+        "accountsImported": "Importati {{count}} account",
+        "configImported": "Dati di configurazione ripristinati",
+        "accountsSectionMissing": "Questo backup non include dati account",
+        "configSectionMissing": "Questo backup non include dati di configurazione, quindi sono stati ripristinati solo i dati account",
+        "unresolvedRefs": "{{count}} collegamenti account non sono stati trovati e sono stati saltati",
+        "disabledTasks": "{{count}} attività sono state disattivate perché non è stato possibile associare alcun account",
+        "restartRequired": "Le impostazioni del servizio di rete sono state ripristinate. Alcune modifiche avranno effetto dopo il riavvio",
+        "partialAccountFailure": "Importazione di alcuni account non riuscita: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "Seleziona almeno un tipo di dato",
+        "accountsOnlyFile": "Questo backup contiene solo dati account. Seleziona \"Dati account\" per importarlo",
+        "selectedSectionsMissing": "Il tipo di dato selezionato non è presente in questo backup",
+        "unsupportedLegacyFile": "Questo formato di backup account legacy non è riconosciuto",
+        "unsupportedVersion": "Questa versione dell'app non supporta quella versione del pacchetto"
+      }
+    }
   },
   "appPath": {
     "missing": {
@@ -1735,7 +1831,8 @@
         "syncSessions": "Sincronizza sessioni",
         "expand": "Espandi",
         "collapse": "Comprimi",
-        "repairVisibility": "Ripara visibilità"
+        "repairVisibility": "Ripara visibilità",
+        "restoreSessions": "Ripristina sessioni"
       },
       "confirm": {
         "title": "Sposta nel cestino",
@@ -1749,12 +1846,20 @@
       },
       "messages": {
         "pickOne": "Seleziona almeno una sessione",
-        "syncNeedTwo": "Sono necessarie almeno due istanze per sincronizzare le sessioni"
+        "syncNeedTwo": "Sono necessarie almeno due istanze per sincronizzare le sessioni",
+        "pickRestoreOne": "Seleziona almeno una sessione da ripristinare"
       },
       "groupCount": "{{count}} sessioni",
       "updatedAt": "Aggiornato",
       "locationRunning": " (in esecuzione)",
-      "untitled": "Sessione senza titolo"
+      "untitled": "Sessione senza titolo",
+      "restoreModal": {
+        "title": "Ripristina sessioni",
+        "hint": "Con il ripristino, il file rollout, la riga del thread SQLite e la voce session_index tornano insieme nell'istanza originale.",
+        "emptyTitle": "Il cestino è vuoto",
+        "emptyDesc": "Le sessioni spostate nel cestino appariranno qui.",
+        "restoreAction": "Ripristina le sessioni selezionate"
+      }
     },
     "api": {
       "baseUrl": "URL di base",
@@ -1880,7 +1985,41 @@
       "selectSavedApiKey": "Chiavi API salvate",
       "noSavedProviders": "Non ci sono ancora provider salvati. Puoi compilare direttamente i campi e verranno salvati automaticamente.",
       "newProviderName": "Nome del provider (facoltativo, usato per il salvataggio automatico)",
-      "newProviderNamePlaceholder": "Se lasciato vuoto, verrà usato automaticamente il nome host"
+      "newProviderNamePlaceholder": "Se lasciato vuoto, verrà usato automaticamente il nome host",
+      "preview": {
+        "title": "Anteprima salvataggio",
+        "desc": "Il salvataggio di un provider aggiorna prima l'archivio dei provider. Non cambia subito la configurazione ufficiale attuale di Codex.",
+        "writeNow": "Verrà scritto",
+        "noImmediateChange": "Nessuna modifica immediata",
+        "providerStoreTitle": "Archivio provider",
+        "providerStoreDesc": "Salva il nome del provider, la Base URL, i link al sito/alla pagina API Key e ogni nuova API Key aggiunta in questa finestra.",
+        "codexConfigTitle": "Configurazione attuale di Codex",
+        "codexConfigDesc": "Il provider corrente o la Base URL non cambiano subito. Quel file si aggiorna solo quando si salva o si cambia un account Codex con API Key.",
+        "authFileTitle": "Credenziali attuali di Codex",
+        "authFileDesc": "Salvare un provider non sovrascrive l'attuale OPENAI_API_KEY in auth.json."
+      },
+      "quickConfig": {
+        "title": "Configurazione attuale di Codex",
+        "desc": "Queste impostazioni rapide scrivono direttamente nel file ~/.codex/config.toml attivo e non modificano l'archivio dei provider di modelli.",
+        "configPath": "File di configurazione",
+        "openConfig": "Apri file",
+        "loadFailed": "Impossibile caricare la configurazione attuale di Codex: {{error}}",
+        "openFailed": "Impossibile aprire config.toml: {{error}}",
+        "saveSuccess": "Configurazione attuale di Codex salvata.",
+        "saveFailed": "Impossibile salvare la configurazione attuale di Codex: {{error}}",
+        "contextWindow1m": "Finestra di contesto 1M",
+        "contextWindow1mHint": "Quando attivo, scrive model_context_window = 1000000 e gestisce insieme il limite di auto-compact.",
+        "autoCompactLimit": "Limite auto-compact",
+        "autoCompactLimitHint": "Scrive model_auto_compact_token_limit. Disattivando l'interruttore 1M, questo campo viene rimosso insieme.",
+        "preview": "Anteprima scrittura",
+        "previewApply": "Verrà scritto",
+        "previewRemove": "Verrà rimosso",
+        "customDetected": "È stato rilevato un model_context_window = {{context}} personalizzato in config.toml. Il salvataggio lo riscriverà usando l'impostazione rapida qui sotto.",
+        "compactMissingDetected": "Il contesto 1M è già attivo, ma manca il limite di auto-compact. Il salvataggio scriverà il valore predefinito {{limit}}.",
+        "validation": {
+          "autoCompactInvalid": "Il limite di auto-compact deve essere un numero intero maggiore di 0."
+        }
+      }
     },
     "quickSwitch": {
       "action": "Cambio rapido provider",
@@ -2140,8 +2279,7 @@
       "description": "Fai clic su \"Aggiungi account\" per iniziare"
     },
     "addModal": {
-      "title": "Aggiungi account Windsurf",
-      "password": "Email e password"
+      "title": "Aggiungi account Windsurf"
     },
     "oauth": {
       "desc": "Fai clic qui sotto e completa l'autorizzazione di Windsurf nel browser."
@@ -2184,16 +2322,6 @@
       "inject": "Cambio con un clic: questo strumento legge il materiale di crittografia locale di Windsurf (DPAPI/Keychain/Secret Service), decifra la sessione di autenticazione in state.vscdb, sostituisce il token Windsurf e cifra di nuovo il tutto — interamente in locale sul tuo dispositivo.",
       "reason": "Ambito permessi: leggere il database di autenticazione di Windsurf (state.vscdb) e usare la cifratura di sistema (Windows DPAPI / macOS Keychain / Linux Secret Service) per decifrare e riscrivere.",
       "storage": "Ambito di lettura: vengono trattati solo i dati relativi alle sessioni di accesso Windsurf; tutti i processi vengono eseguiti in locale."
-    },
-    "password": {
-      "desc": "Accedi con email e password del tuo account Windsurf per ottenere automaticamente chiave API e informazioni account.",
-      "emailPlaceholder": "Indirizzo email",
-      "passwordPlaceholder": "Password",
-      "login": "Accedi",
-      "logging": "Accesso in corso...",
-      "empty": "Inserisci email e password",
-      "success": "Accesso riuscito: {{login}}",
-      "failed": "Accesso non riuscito: {{error}}"
     }
   },
   "kiro": {
@@ -2683,6 +2811,26 @@
       "saved": "Progetto salvato: {{projectId}}",
       "cleared": "Ripristinato il rilevamento automatico del progetto",
       "savedWithRefreshError": "Progetto salvato, ma aggiornamento quota non riuscito: {{error}}"
+    },
+    "identity": {
+      "authMethod": "Metodo di autenticazione",
+      "tier": "Piano",
+      "signedInWithGoogle": "Accesso con Google",
+      "signedInWithGoogleEmail": "Accesso con Google ({{email}})"
+    },
+    "quotaTable": {
+      "model": "Modello",
+      "leftOfTotal": "Residuo / Totale",
+      "usage": "Usato",
+      "usageResets": "Reset utilizzo",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist su Google One AI Pro",
+      "ultra": "Gemini Code Assist su Google AI Ultra",
+      "free": "Gemini Code Assist gratuito"
     }
   },
   "codebuddy": {

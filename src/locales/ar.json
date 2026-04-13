@@ -132,6 +132,7 @@
       },
       "quota": {
         "noData": "لا توجد بيانات للحصة",
+        "queryFailed": "فشل استعلام الحصة",
         "resetDone": "تمت إعادة الضبط",
         "hourly": "الاقتراحات المضمنة",
         "weekly": "رسائل الدردشة",
@@ -355,7 +356,8 @@
       "running": "قيد التشغيل",
       "stopped": "متوقف",
       "restarting": "إعادة التشغيل",
-      "starting": "البدء"
+      "starting": "البدء",
+      "ready": "جاهز"
     },
     "labels": {
       "path": "المجلد",
@@ -365,7 +367,8 @@
       "unbound": "غير مرتبط",
       "pendingInit": "بانتظار التهيئة (شغّل مرة واحدة أولاً)",
       "quota": "الحصة",
-      "lastLaunched": "آخر تشغيل"
+      "lastLaunched": "آخر تشغيل",
+      "argsPresent": "المعاملات مضبوطة"
     },
     "columns": {
       "instance": "المثيل",
@@ -415,7 +418,14 @@
       "extraArgsDesc": "فصل المعاملات بمسافات، يدعم التضمين بعلامات الاقتباس",
       "nameRequired": "يرجى إدخال اسم المثيل",
       "pathRequired": "يرجى اختيار مجلد المثيل",
-      "bindRequired": "يرجى اختيار الحساب للربط"
+      "bindRequired": "يرجى اختيار الحساب للربط",
+      "optional": "اختياري",
+      "launchMode": "طريقة التشغيل",
+      "launchModeApp": "سطح المكتب",
+      "launchModeCli": "وضع CLI",
+      "workingDir": "دليل العمل",
+      "workingDirPlaceholder": "افتراضيًا المسار الحالي",
+      "workingDirDesc": "سيتم التبديل إلى هذا الدليل أولًا عند التشغيل"
     },
     "quota": {
       "unbound": "حساب غير مرتبط",
@@ -436,7 +446,7 @@
       "allAlreadyRunning": "جميع المثيلات قيد التشغيل بالفعل",
       "noneRunning": "لا توجد مثيلات قيد التشغيل حاليًا",
       "syncThreadsNeedTwo": "يلزم وجود مثيلين على الأقل لمزامنة السلاسل",
-      "launchPrepared": "تم تجهيز أمر التشغيل"
+      "launchPrepared": "أمر التشغيل جاهز"
     },
     "runningDialog": {
       "title": "المثيل قيد التشغيل",
@@ -501,11 +511,11 @@
       "submit": "استيراد"
     },
     "launchDialog": {
-      "command": "أمر التشغيل",
-      "hint": "انسخ الأمر وشغّله يدويًا، أو شغّله مباشرةً عبر الطرفية من الزر أدناه.",
-      "runInTerminal": "تشغيل في الطرفية",
+      "title": "تشغيل المثيل",
       "terminal": "الطرفية",
-      "title": "تشغيل الحالة"
+      "command": "أمر التشغيل",
+      "hint": "انسخ الأمر وشغّله يدويًا، أو نفّذه مباشرة في الطرفية.",
+      "runInTerminal": "تشغيل في الطرفية"
     }
   },
   "settings": {
@@ -763,7 +773,93 @@
       "download": "تنزيل",
       "checkFailed": "فشل التحقق من التحديثات"
     },
-    "saveSettings": "حفظ الإعدادات"
+    "saveSettings": "حفظ الإعدادات",
+    "transfer": {
+      "backup": {
+        "title": "إدارة النسخ الاحتياطي",
+        "desc": "إدارة النسخ الاحتياطية المجدولة ومجلد النسخ وقائمة الملفات من مكان واحد.",
+        "modalDesc": "اضبط النسخ الاحتياطي التلقائي، وتصفح الملفات المحفوظة في مجلد النسخ، ونفّذ الاستعادة أو التنظيف من هنا.",
+        "statusEnabled": "النسخ الاحتياطي التلقائي مفعّل",
+        "statusDisabled": "النسخ الاحتياطي التلقائي متوقف",
+        "lastRunLabel": "آخر نسخة احتياطية: {{time}}",
+        "lastRunNever": "لا توجد نسخة احتياطية بعد",
+        "autoTitle": "نسخ احتياطي مجدول",
+        "autoDesc": "عند التفعيل، يُنشأ ملف نسخ احتياطي واحد يوميًا ويمكن استعادته مباشرة عبر الاستيراد الحالي.",
+        "runNow": "نسخ احتياطي الآن",
+        "running": "جارٍ النسخ الاحتياطي...",
+        "typeTitle": "نوع النسخ الاحتياطي",
+        "typeDesc": "اختر نطاق البيانات المطلوب نسخه تلقائيًا.",
+        "typeFull": "كامل البيانات",
+        "typeAccounts": "الحسابات فقط",
+        "typeConfig": "الإعدادات فقط",
+        "retentionTitle": "مدة الاحتفاظ",
+        "retentionDesc": "سيتم حذف النسخ الأقدم من هذه المدة عند الفحص التالي.",
+        "retentionUnit": "أيام",
+        "directoryTitle": "مجلد النسخ الاحتياطي",
+        "directoryDesc": "تُحفظ النسخ الاحتياطية دائمًا في مجلد backups الخاص بالمشروع.",
+        "openFolder": "فتح المجلد",
+        "listTitle": "قائمة النسخ الاحتياطية",
+        "listDesc": "استورد نسخة احتياطية مباشرة أو احذف الملفات القديمة.",
+        "openList": "فتح القائمة",
+        "emptyTitle": "لا توجد نسخ احتياطية بعد",
+        "emptyDesc": "فعّل النسخ الاحتياطي التلقائي أو اضغط «نسخ احتياطي الآن» لإنشاء ملفات JSON قابلة للاستعادة هنا.",
+        "sourceAuto": "تلقائي",
+        "sourceManual": "يدوي",
+        "fileTime": "الوقت: {{time}}",
+        "fileSize": "الحجم: {{size}}",
+        "importAction": "استيراد",
+        "deleteAction": "حذف",
+        "deleteConfirm": "حذف النسخة الاحتياطية {{name}}؟",
+        "feedback": {
+          "running": "جارٍ إنشاء النسخة الاحتياطية...",
+          "runSuccess": "تم حفظ النسخة الاحتياطية في {{path}}",
+          "runSuccessWithCleanup": "تم حفظ النسخة الاحتياطية في {{path}} مع تنظيف {{count}} نسخة احتياطية منتهية",
+          "runFailed": "فشل النسخ الاحتياطي: {{error}}",
+          "deleteSuccess": "تم حذف النسخة الاحتياطية",
+          "deleteFailed": "فشل حذف النسخة الاحتياطية: {{error}}",
+          "loadFailed": "فشل تحميل قائمة النسخ الاحتياطية: {{error}}",
+          "saveSettingsFailed": "فشل حفظ إعدادات النسخ الاحتياطي: {{error}}",
+          "cleanupDone": "تم تنظيف {{count}} نسخة احتياطية منتهية",
+          "cleanupFailed": "فشل تنظيف النسخ الاحتياطية المنتهية: {{error}}",
+          "openFolderFailed": "فشل فتح مجلد النسخ الاحتياطي: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "يجب أن تكون مدة الاحتفاظ بين 1 و365 يومًا"
+        }
+      },
+      "exportTitle": "تصدير البيانات",
+      "exportDesc": "صدّر بيانات الحسابات أو بيانات الإعدادات أو حزمة ترحيل كاملة حسب الحاجة.",
+      "importTitle": "استيراد البيانات",
+      "importDesc": "استورد نسخًا احتياطية للحسابات أو الإعدادات أو حزمة البيانات الموحدة.",
+      "exportModalDesc": "اختر ما تريد تصديره. حدّد الحسابات والإعدادات معًا للحصول على حزمة ترحيل كاملة.",
+      "importModalDesc": "اختر ما تريد استيراده. ستُعامل نسخ الحسابات الاحتياطية القديمة كاستيراد للحسابات فقط.",
+      "selectionTitle": "نطاق البيانات",
+      "accountsOptionTitle": "بيانات الحسابات",
+      "accountsOptionDesc": "تتضمن نسخًا احتياطية لحسابات المنصات وتحافظ على توافق JSON القديم للحسابات.",
+      "configOptionTitle": "بيانات الإعدادات",
+      "configOptionDesc": "تتضمن إعدادات التطبيق والمجموعات والمثيلات ومهام الإيقاظ وإعدادات مزوّدي النماذج.",
+      "exportConfirm": "تصدير البيانات",
+      "fromFileTitle": "استيراد من ملف",
+      "fromFileDesc": "اختر ملف JSON للاستيراد. كما يدعم نسخ الحسابات الاحتياطية القديمة هنا.",
+      "jsonPlaceholder": "ألصق حزمة البيانات أو JSON القديم للحسابات",
+      "feedback": {
+        "accountsImported": "تم استيراد {{count}} حسابًا",
+        "configImported": "تمت استعادة بيانات الإعدادات",
+        "accountsSectionMissing": "لا تحتوي النسخة الاحتياطية على بيانات الحسابات",
+        "configSectionMissing": "لا تحتوي النسخة الاحتياطية على بيانات الإعدادات، لذا تمت استعادة بيانات الحسابات فقط",
+        "unresolvedRefs": "تعذّر مطابقة {{count}} من روابط الحسابات وتم تجاوزها",
+        "disabledTasks": "تم تعطيل {{count}} مهمة لعدم إمكانية مطابقة حساب",
+        "restartRequired": "تمت استعادة إعدادات خدمة الشبكة. ستسري بعض التغييرات بعد إعادة التشغيل",
+        "partialAccountFailure": "فشل استيراد بعض الحسابات: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "اختر نوع بيانات واحدًا على الأقل",
+        "accountsOnlyFile": "تحتوي هذه النسخة الاحتياطية على بيانات الحسابات فقط. اختر \"بيانات الحسابات\" لاستيرادها",
+        "selectedSectionsMissing": "نوع البيانات المحدد غير موجود في هذه النسخة الاحتياطية",
+        "unsupportedLegacyFile": "تعذر التعرف على تنسيق نسخة الحسابات الاحتياطية القديمة",
+        "unsupportedVersion": "إصدار التطبيق الحالي لا يدعم إصدار الحزمة هذا"
+      }
+    }
   },
   "appPath": {
     "missing": {
@@ -1781,7 +1877,8 @@
         "syncSessions": "مزامنة الجلسات",
         "expand": "توسيع",
         "collapse": "طي",
-        "repairVisibility": "إصلاح الظهور"
+        "repairVisibility": "إصلاح الظهور",
+        "restoreSessions": "استعادة الجلسات"
       },
       "confirm": {
         "title": "نقل إلى المهملات",
@@ -1795,12 +1892,20 @@
       },
       "messages": {
         "pickOne": "يرجى تحديد جلسة واحدة على الأقل",
-        "syncNeedTwo": "يلزم وجود مثيلين على الأقل لمزامنة الجلسات"
+        "syncNeedTwo": "يلزم وجود مثيلين على الأقل لمزامنة الجلسات",
+        "pickRestoreOne": "يرجى تحديد جلسة واحدة على الأقل لاستعادتها"
       },
       "groupCount": "{{count}} جلسة",
       "updatedAt": "تم التحديث",
       "locationRunning": " (قيد التشغيل)",
-      "untitled": "جلسة بدون عنوان"
+      "untitled": "جلسة بدون عنوان",
+      "restoreModal": {
+        "title": "استعادة الجلسات",
+        "hint": "عند الاستعادة ستعود ملف rollout وسطر الخيط في SQLite ومدخل session_index معًا إلى المثيل الأصلي.",
+        "emptyTitle": "سلة المهملات فارغة",
+        "emptyDesc": "ستظهر هنا الجلسات المنقولة إلى سلة المهملات.",
+        "restoreAction": "استعادة الجلسات المحددة"
+      }
     },
     "api": {
       "baseUrl": "عنوان URL الأساسي",
@@ -1926,7 +2031,41 @@
       "selectSavedApiKey": "مفاتيح API المحفوظة",
       "noSavedProviders": "لا يوجد مزوّدون محفوظون بعد. يمكنك تعبئة الحقول مباشرةً وسيتم الحفظ تلقائيًا.",
       "newProviderName": "اسم المزوّد (اختياري، يُستخدم للحفظ التلقائي)",
-      "newProviderNamePlaceholder": "إذا تُرك فارغًا، فسيُستخدم اسم المضيف تلقائيًا"
+      "newProviderNamePlaceholder": "إذا تُرك فارغًا، فسيُستخدم اسم المضيف تلقائيًا",
+      "preview": {
+        "title": "معاينة الحفظ",
+        "desc": "عند حفظ مزوّد ما، يتم تحديث مخزن المزوّدين أولًا. ولن يتم تبديل إعداد Codex الرسمي الحالي فورًا.",
+        "writeNow": "سيُكتب",
+        "noImmediateChange": "لا تغيير فوري",
+        "providerStoreTitle": "مخزن المزوّدين",
+        "providerStoreDesc": "يحفظ اسم المزوّد وBase URL وروابط الموقع/صفحة API Key وأي مفتاح API جديد أُضيف في هذه النافذة.",
+        "codexConfigTitle": "إعداد Codex الحالي",
+        "codexConfigDesc": "لن يتغير المزوّد الحالي أو Base URL مباشرة. لا يُحدَّث هذا الملف إلا عند حفظ حساب Codex API Key أو تبديله.",
+        "authFileTitle": "بيانات اعتماد Codex الحالية",
+        "authFileDesc": "حفظ المزوّد لا يستبدل قيمة OPENAI_API_KEY الحالية في auth.json."
+      },
+      "quickConfig": {
+        "title": "إعداد Codex الحالي",
+        "desc": "تكتب هذه الإعدادات السريعة مباشرة إلى ~/.codex/config.toml النشط، ولا تغيّر مخزن مزوّدي النماذج.",
+        "configPath": "ملف الإعداد",
+        "openConfig": "فتح الملف",
+        "loadFailed": "تعذّر تحميل إعداد Codex الحالي: {{error}}",
+        "openFailed": "تعذّر فتح config.toml: {{error}}",
+        "saveSuccess": "تم حفظ إعداد Codex الحالي.",
+        "saveFailed": "تعذّر حفظ إعداد Codex الحالي: {{error}}",
+        "contextWindow1m": "نافذة سياق 1M",
+        "contextWindow1mHint": "عند التفعيل، سيتم كتابة model_context_window = 1000000 مع إدارة حد الضغط التلقائي معًا.",
+        "autoCompactLimit": "حد الضغط التلقائي",
+        "autoCompactLimitHint": "يكتب model_auto_compact_token_limit. عند إيقاف مفتاح 1M ستتم إزالة هذا الحقل أيضًا.",
+        "preview": "معاينة الكتابة",
+        "previewApply": "سيُكتب",
+        "previewRemove": "سيُزال",
+        "customDetected": "تم اكتشاف model_context_window = {{context}} مخصص في config.toml. سيؤدي الحفظ إلى إعادة كتابته باستخدام الإعداد السريع أدناه.",
+        "compactMissingDetected": "تم تفعيل سياق 1M بالفعل، لكن حد الضغط التلقائي مفقود. سيكتب الحفظ القيمة الافتراضية {{limit}}.",
+        "validation": {
+          "autoCompactInvalid": "يجب أن يكون حد الضغط التلقائي عددًا صحيحًا أكبر من 0."
+        }
+      }
     },
     "quickSwitch": {
       "action": "تبديل المزوّد سريعًا",
@@ -2186,8 +2325,7 @@
       "description": "انقر على \"إضافة حساب\" لبدء إدارة حسابات Windsurf"
     },
     "addModal": {
-      "title": "إضافة حساب Windsurf",
-      "password": "البريد الإلكتروني وكلمة المرور"
+      "title": "إضافة حساب Windsurf"
     },
     "oauth": {
       "desc": "انقر الزر أدناه وأكمل تفويض Windsurf في المتصفح."
@@ -2230,16 +2368,6 @@
       "inject": "تبديل بنقرة واحدة: تقرأ هذه الأداة مواد التشفير المحلية في Windsurf (DPAPI/Keychain/Secret Service)، وتفك تشفير جلسة المصادقة في state.vscdb، وتستبدل رمز Windsurf ثم تعيد التشفير — وكل ذلك محليًا على جهازك.",
       "reason": "نطاق الأذونات: قراءة قاعدة بيانات مصادقة Windsurf ‏(state.vscdb) واستدعاء قدرات التشفير في النظام (Windows DPAPI / macOS Keychain / Linux Secret Service) لفك التشفير وإعادة الكتابة.",
       "storage": "نطاق القراءة: تتم معالجة بيانات جلسات تسجيل الدخول المرتبطة بـ Windsurf فقط، وجميع العمليات تُنفّذ محليًا."
-    },
-    "password": {
-      "desc": "سجّل الدخول ببريد حساب Windsurf وكلمة المرور لجلب مفتاح API ومعلومات الحساب تلقائيًا.",
-      "emailPlaceholder": "عنوان البريد الإلكتروني",
-      "passwordPlaceholder": "كلمة المرور",
-      "login": "تسجيل الدخول",
-      "logging": "جارٍ تسجيل الدخول...",
-      "empty": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
-      "success": "تم تسجيل الدخول: {{login}}",
-      "failed": "فشل تسجيل الدخول: {{error}}"
     }
   },
   "kiro": {
@@ -2729,6 +2857,26 @@
       "saved": "تم حفظ المشروع: {{projectId}}",
       "cleared": "تمت العودة إلى اكتشاف المشروع تلقائيًا",
       "savedWithRefreshError": "تم حفظ المشروع، لكن فشل تحديث الحصة: {{error}}"
+    },
+    "identity": {
+      "authMethod": "طريقة المصادقة",
+      "tier": "الخطة",
+      "signedInWithGoogle": "تم تسجيل الدخول عبر Google",
+      "signedInWithGoogleEmail": "تم تسجيل الدخول عبر Google ({{email}})"
+    },
+    "quotaTable": {
+      "model": "النموذج",
+      "leftOfTotal": "المتبقي / الإجمالي",
+      "usage": "المستخدم",
+      "usageResets": "إعادة تعيين الاستخدام",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist ضمن Google One AI Pro",
+      "ultra": "Gemini Code Assist ضمن Google AI Ultra",
+      "free": "Gemini Code Assist المجاني"
     }
   },
   "codebuddy": {

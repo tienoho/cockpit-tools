@@ -132,6 +132,7 @@
       },
       "quota": {
         "noData": "Không có dữ liệu hạn mức",
+        "queryFailed": "Truy vấn hạn mức thất bại",
         "resetDone": "Đã đặt lại",
         "hourly": "Hạn mức 5 giờ",
         "weekly": "Hạn mức tuần",
@@ -309,7 +310,8 @@
       "running": "Đang chạy",
       "stopped": "Đã dừng",
       "restarting": "Đang khởi động lại",
-      "starting": "Bắt đầu"
+      "starting": "Bắt đầu",
+      "ready": "Sẵn sàng"
     },
     "labels": {
       "path": "Thư mục",
@@ -319,7 +321,8 @@
       "unbound": "Chưa liên kết",
       "pendingInit": "Chờ khởi tạo (hãy chạy một lần trước)",
       "quota": "Hạn ngạch",
-      "lastLaunched": "Lần chạy cuối"
+      "lastLaunched": "Lần chạy cuối",
+      "argsPresent": "Có args"
     },
     "columns": {
       "instance": "Phiên bản",
@@ -369,7 +372,14 @@
       "extraArgsDesc": "Phân cách các đối số bằng khoảng trắng, hỗ trợ dấu ngoặc kép",
       "nameRequired": "Vui lòng nhập tên phiên bản",
       "pathRequired": "Vui lòng chọn thư mục phiên bản",
-      "bindRequired": "Vui lòng chọn một tài khoản để liên kết"
+      "bindRequired": "Vui lòng chọn một tài khoản để liên kết",
+      "optional": "Tùy chọn",
+      "launchMode": "Chế độ khởi chạy",
+      "launchModeApp": "Bản desktop",
+      "launchModeCli": "Chế độ CLI",
+      "workingDir": "Thư mục làm việc",
+      "workingDirPlaceholder": "Mặc định dùng đường dẫn hiện tại",
+      "workingDirDesc": "Khi khởi động sẽ chuyển vào thư mục này trước"
     },
     "quota": {
       "unbound": "Tài khoản chưa liên kết",
@@ -390,7 +400,7 @@
       "allAlreadyRunning": "Tất cả các phiên bản đã đang chạy",
       "noneRunning": "Không tìm thấy phiên bản nào đang chạy",
       "syncThreadsNeedTwo": "Cần ít nhất hai phiên bản để đồng bộ luồng",
-      "launchPrepared": "Lệnh khởi chạy đã được chuẩn bị"
+      "launchPrepared": "Lệnh khởi chạy đã sẵn sàng"
     },
     "runningDialog": {
       "title": "Phiên bản đã đang chạy",
@@ -455,11 +465,11 @@
       "submit": "Nhập"
     },
     "launchDialog": {
+      "title": "Khởi chạy phiên bản",
+      "terminal": "Cửa sổ lệnh",
       "command": "Lệnh khởi chạy",
-      "hint": "Sao chép lệnh và chạy thủ công, hoặc chạy trực tiếp trong terminal bằng nút bên dưới.",
-      "runInTerminal": "Chạy trong terminal",
-      "terminal": "Terminal",
-      "title": "Khởi động phiên bản"
+      "hint": "Sao chép lệnh để chạy thủ công hoặc chạy trực tiếp trong terminal.",
+      "runInTerminal": "Chạy trong terminal"
     }
   },
   "settings": {
@@ -717,7 +727,93 @@
       "download": "Tải về",
       "checkFailed": "Kiểm tra cập nhật thất bại, vui lòng thử lại sau"
     },
-    "saveSettings": "Lưu cài đặt"
+    "saveSettings": "Lưu cài đặt",
+    "transfer": {
+      "backup": {
+        "title": "Trình quản lý sao lưu",
+        "desc": "Quản lý sao lưu theo lịch, thư mục sao lưu và danh sách tệp ở cùng một nơi.",
+        "modalDesc": "Thiết lập sao lưu tự động, duyệt các tệp trong thư mục sao lưu của dự án và khôi phục hoặc dọn dẹp chúng tại đây.",
+        "statusEnabled": "Đã bật sao lưu tự động",
+        "statusDisabled": "Đã tắt sao lưu tự động",
+        "lastRunLabel": "Lần sao lưu gần nhất: {{time}}",
+        "lastRunNever": "Chưa có bản sao lưu nào",
+        "autoTitle": "Sao lưu theo lịch",
+        "autoDesc": "Khi bật, hệ thống sẽ xuất một bản sao lưu mỗi ngày và có thể khôi phục qua luồng nhập hiện tại.",
+        "runNow": "Sao lưu ngay",
+        "running": "Đang sao lưu...",
+        "typeTitle": "Loại sao lưu",
+        "typeDesc": "Chọn phạm vi dữ liệu cần sao lưu tự động.",
+        "typeFull": "Toàn bộ dữ liệu",
+        "typeAccounts": "Chỉ tài khoản",
+        "typeConfig": "Chỉ cấu hình",
+        "retentionTitle": "Thời gian lưu",
+        "retentionDesc": "Các bản sao lưu cũ hơn mốc này sẽ bị xóa ở lần kiểm tra tiếp theo.",
+        "retentionUnit": "ngày",
+        "directoryTitle": "Thư mục sao lưu",
+        "directoryDesc": "Các bản sao lưu luôn được lưu trong thư mục backups của dự án.",
+        "openFolder": "Mở thư mục",
+        "listTitle": "Danh sách sao lưu",
+        "listDesc": "Nhập trực tiếp một bản sao lưu hoặc xóa các tệp cũ.",
+        "openList": "Mở danh sách",
+        "emptyTitle": "Chưa có bản sao lưu",
+        "emptyDesc": "Bật sao lưu tự động hoặc nhấn “Sao lưu ngay” để tạo các bản sao lưu JSON có thể khôi phục tại đây.",
+        "sourceAuto": "Tự động",
+        "sourceManual": "Thủ công",
+        "fileTime": "Thời gian: {{time}}",
+        "fileSize": "Dung lượng: {{size}}",
+        "importAction": "Nhập",
+        "deleteAction": "Xóa",
+        "deleteConfirm": "Xóa bản sao lưu {{name}}?",
+        "feedback": {
+          "running": "Đang tạo bản sao lưu...",
+          "runSuccess": "Đã lưu bản sao lưu vào {{path}}",
+          "runSuccessWithCleanup": "Đã lưu bản sao lưu vào {{path}} và dọn {{count}} bản sao lưu hết hạn",
+          "runFailed": "Sao lưu thất bại: {{error}}",
+          "deleteSuccess": "Đã xóa bản sao lưu",
+          "deleteFailed": "Xóa bản sao lưu thất bại: {{error}}",
+          "loadFailed": "Tải danh sách sao lưu thất bại: {{error}}",
+          "saveSettingsFailed": "Lưu thiết lập sao lưu thất bại: {{error}}",
+          "cleanupDone": "Đã dọn {{count}} bản sao lưu hết hạn",
+          "cleanupFailed": "Dọn bản sao lưu hết hạn thất bại: {{error}}",
+          "openFolderFailed": "Mở thư mục sao lưu thất bại: {{error}}"
+        },
+        "errors": {
+          "invalidRetention": "Thời gian lưu phải từ 1 đến 365 ngày"
+        }
+      },
+      "exportTitle": "Xuất dữ liệu",
+      "exportDesc": "Xuất dữ liệu tài khoản, dữ liệu cấu hình hoặc gói di chuyển đầy đủ tùy nhu cầu.",
+      "importTitle": "Nhập dữ liệu",
+      "importDesc": "Nhập bản sao lưu tài khoản, bản sao lưu cấu hình hoặc gói dữ liệu hợp nhất.",
+      "exportModalDesc": "Chọn nội dung cần xuất. Chọn cả tài khoản và cấu hình để tạo gói di chuyển đầy đủ.",
+      "importModalDesc": "Chọn nội dung cần nhập. Bản sao lưu tài khoản kiểu cũ sẽ được xử lý như chỉ nhập dữ liệu tài khoản.",
+      "selectionTitle": "Phạm vi dữ liệu",
+      "accountsOptionTitle": "Dữ liệu tài khoản",
+      "accountsOptionDesc": "Bao gồm bản sao lưu tài khoản nền tảng và vẫn tương thích với JSON tài khoản kiểu cũ.",
+      "configOptionTitle": "Dữ liệu cấu hình",
+      "configOptionDesc": "Bao gồm cài đặt ứng dụng, nhóm, instance, tác vụ wakeup và cấu hình nhà cung cấp mô hình.",
+      "exportConfirm": "Xuất dữ liệu",
+      "fromFileTitle": "Nhập từ tệp",
+      "fromFileDesc": "Chọn tệp JSON để nhập. Bản sao lưu tài khoản kiểu cũ cũng được hỗ trợ tại đây.",
+      "jsonPlaceholder": "Dán gói dữ liệu hoặc JSON tài khoản kiểu cũ",
+      "feedback": {
+        "accountsImported": "Đã nhập {{count}} tài khoản",
+        "configImported": "Đã khôi phục dữ liệu cấu hình",
+        "accountsSectionMissing": "Bản sao lưu này không có dữ liệu tài khoản",
+        "configSectionMissing": "Bản sao lưu này không có dữ liệu cấu hình nên chỉ khôi phục dữ liệu tài khoản",
+        "unresolvedRefs": "Có {{count}} liên kết tài khoản không khớp và đã bị bỏ qua",
+        "disabledTasks": "Đã tắt {{count}} tác vụ vì không khớp được tài khoản",
+        "restartRequired": "Đã khôi phục cài đặt dịch vụ mạng. Một số thay đổi sẽ có hiệu lực sau khi khởi động lại",
+        "partialAccountFailure": "Một số tài khoản nhập thất bại: {{error}}"
+      },
+      "errors": {
+        "selectionRequired": "Hãy chọn ít nhất một loại dữ liệu",
+        "accountsOnlyFile": "Bản sao lưu này chỉ chứa dữ liệu tài khoản. Hãy chọn \"Dữ liệu tài khoản\" để nhập",
+        "selectedSectionsMissing": "Loại dữ liệu đã chọn không có trong bản sao lưu này",
+        "unsupportedLegacyFile": "Không nhận ra định dạng bản sao lưu tài khoản kiểu cũ này",
+        "unsupportedVersion": "Phiên bản ứng dụng này không hỗ trợ phiên bản gói đó"
+      }
+    }
   },
   "appPath": {
     "missing": {
@@ -1735,7 +1831,8 @@
         "syncSessions": "Đồng bộ phiên",
         "expand": "Mở rộng",
         "collapse": "Thu gọn",
-        "repairVisibility": "Sửa hiển thị"
+        "repairVisibility": "Sửa hiển thị",
+        "restoreSessions": "Khôi phục phiên"
       },
       "confirm": {
         "title": "Chuyển vào thùng rác",
@@ -1749,12 +1846,20 @@
       },
       "messages": {
         "pickOne": "Vui lòng chọn ít nhất một phiên",
-        "syncNeedTwo": "Cần ít nhất hai phiên bản để đồng bộ phiên"
+        "syncNeedTwo": "Cần ít nhất hai phiên bản để đồng bộ phiên",
+        "pickRestoreOne": "Hãy chọn ít nhất một phiên để khôi phục"
       },
       "groupCount": "{{count}} phiên",
       "updatedAt": "Đã cập nhật",
       "locationRunning": " (đang chạy)",
-      "untitled": "Phiên chưa đặt tên"
+      "untitled": "Phiên chưa đặt tên",
+      "restoreModal": {
+        "title": "Khôi phục phiên",
+        "hint": "Khi khôi phục, tệp rollout, dòng thread trong SQLite và mục session_index sẽ được trả lại cùng nhau về instance gốc.",
+        "emptyTitle": "Thùng rác trống",
+        "emptyDesc": "Các phiên đã chuyển vào thùng rác sẽ xuất hiện ở đây.",
+        "restoreAction": "Khôi phục các phiên đã chọn"
+      }
     },
     "api": {
       "baseUrl": "URL cơ sở",
@@ -1880,7 +1985,41 @@
       "selectSavedApiKey": "API Key đã lưu",
       "noSavedProviders": "Chưa có nhà cung cấp nào được lưu. Bạn có thể điền trực tiếp các trường và hệ thống sẽ tự động lưu.",
       "newProviderName": "Tên nhà cung cấp (tùy chọn, dùng cho tự động lưu)",
-      "newProviderNamePlaceholder": "Nếu để trống, tên máy chủ sẽ được dùng tự động"
+      "newProviderNamePlaceholder": "Nếu để trống, tên máy chủ sẽ được dùng tự động",
+      "preview": {
+        "title": "Xem trước khi lưu",
+        "desc": "Khi lưu nhà cung cấp, kho nhà cung cấp sẽ được cập nhật trước. Cấu hình Codex chính thức hiện tại sẽ không đổi ngay lập tức.",
+        "writeNow": "Sẽ ghi",
+        "noImmediateChange": "Chưa đổi ngay",
+        "providerStoreTitle": "Kho nhà cung cấp",
+        "providerStoreDesc": "Lưu tên nhà cung cấp, Base URL, liên kết trang web/API Key và mọi API Key mới được thêm trong hộp thoại này.",
+        "codexConfigTitle": "Cấu hình Codex hiện tại",
+        "codexConfigDesc": "Nhà cung cấp hiện tại hoặc Base URL sẽ không đổi ngay. Tệp này chỉ được cập nhật khi lưu hoặc chuyển tài khoản Codex API key.",
+        "authFileTitle": "Thông tin xác thực Codex hiện tại",
+        "authFileDesc": "Việc lưu nhà cung cấp không ghi đè OPENAI_API_KEY hiện tại trong auth.json."
+      },
+      "quickConfig": {
+        "title": "Cấu hình Codex hiện tại",
+        "desc": "Các thiết lập nhanh này ghi trực tiếp vào ~/.codex/config.toml đang dùng và không thay đổi kho nhà cung cấp mô hình.",
+        "configPath": "Tệp cấu hình",
+        "openConfig": "Mở tệp",
+        "loadFailed": "Không tải được cấu hình Codex hiện tại: {{error}}",
+        "openFailed": "Không mở được config.toml: {{error}}",
+        "saveSuccess": "Đã lưu cấu hình Codex hiện tại.",
+        "saveFailed": "Không lưu được cấu hình Codex hiện tại: {{error}}",
+        "contextWindow1m": "Cửa sổ ngữ cảnh 1M",
+        "contextWindow1mHint": "Khi bật, sẽ ghi model_context_window = 1000000 và quản lý cùng giới hạn auto-compact.",
+        "autoCompactLimit": "Giới hạn auto-compact",
+        "autoCompactLimitHint": "Ghi model_auto_compact_token_limit. Khi tắt công tắc 1M, trường này cũng bị xóa.",
+        "preview": "Xem trước ghi",
+        "previewApply": "Sẽ ghi",
+        "previewRemove": "Sẽ xóa",
+        "customDetected": "Đã phát hiện model_context_window = {{context}} tùy chỉnh trong config.toml. Khi lưu, nó sẽ được ghi lại theo thiết lập nhanh bên dưới.",
+        "compactMissingDetected": "Ngữ cảnh 1M đã bật nhưng thiếu giới hạn auto-compact. Khi lưu sẽ ghi giá trị mặc định {{limit}}.",
+        "validation": {
+          "autoCompactInvalid": "Giới hạn auto-compact phải là số nguyên lớn hơn 0."
+        }
+      }
     },
     "quickSwitch": {
       "action": "Chuyển nhanh nhà cung cấp",
@@ -2140,8 +2279,7 @@
       "description": "Nhấn \"Thêm tài khoản\" để bắt đầu"
     },
     "addModal": {
-      "title": "Thêm tài khoản Windsurf",
-      "password": "Email và mật khẩu"
+      "title": "Thêm tài khoản Windsurf"
     },
     "oauth": {
       "desc": "Nhấn nút bên dưới và hoàn tất ủy quyền Windsurf trong trình duyệt."
@@ -2184,16 +2322,6 @@
       "inject": "Chuyển đổi một lần nhấp: công cụ này đọc dữ liệu mã hóa cục bộ của Windsurf (DPAPI/Keychain/Secret Service), giải mã phiên xác thực trong state.vscdb, thay thế token Windsurf rồi mã hóa lại — mọi thao tác đều diễn ra cục bộ trên máy của bạn.",
       "reason": "Phạm vi quyền: đọc cơ sở dữ liệu xác thực Windsurf (state.vscdb) và gọi khả năng mã hóa hệ thống (Windows DPAPI / macOS Keychain / Linux Secret Service) để giải mã/ghi lại.",
       "storage": "Phạm vi đọc: chỉ xử lý dữ liệu liên quan đến phiên đăng nhập Windsurf; mọi quy trình đều được thực thi cục bộ."
-    },
-    "password": {
-      "desc": "Đăng nhập bằng email và mật khẩu tài khoản Windsurf để tự động lấy API Key và thông tin tài khoản.",
-      "emailPlaceholder": "Địa chỉ email",
-      "passwordPlaceholder": "Mật khẩu",
-      "login": "Đăng nhập",
-      "logging": "Đang đăng nhập...",
-      "empty": "Vui lòng nhập email và mật khẩu",
-      "success": "Đăng nhập thành công: {{login}}",
-      "failed": "Đăng nhập thất bại: {{error}}"
     }
   },
   "kiro": {
@@ -2683,6 +2811,26 @@
       "saved": "Đã lưu dự án: {{projectId}}",
       "cleared": "Đã chuyển về tự động xác định dự án",
       "savedWithRefreshError": "Đã lưu dự án nhưng làm mới hạn mức thất bại: {{error}}"
+    },
+    "identity": {
+      "authMethod": "Phương thức xác thực",
+      "tier": "Gói",
+      "signedInWithGoogle": "Đăng nhập bằng Google",
+      "signedInWithGoogleEmail": "Đăng nhập bằng Google ({{email}})"
+    },
+    "quotaTable": {
+      "model": "Mô hình",
+      "leftOfTotal": "Còn lại / Tổng",
+      "usage": "Đã dùng",
+      "usageResets": "Đặt lại mức dùng",
+      "usedPercent": "{{value}}%",
+      "remainingOfTotal": "{{remaining}} / {{total}}",
+      "resetAtWithRelative": "{{absolute}} ({{relative}})"
+    },
+    "tierText": {
+      "pro": "Gemini Code Assist trong Google One AI Pro",
+      "ultra": "Gemini Code Assist trong Google AI Ultra",
+      "free": "Gemini Code Assist miễn phí"
     }
   },
   "codebuddy": {
